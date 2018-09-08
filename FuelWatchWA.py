@@ -16,6 +16,6 @@ for i in range(totalEntries):
 
 
 #pprint(FuelEntries)
-pprint(FuelEntries)
+pprint(FuelEntries.index[3])
 
 #Sandesh
