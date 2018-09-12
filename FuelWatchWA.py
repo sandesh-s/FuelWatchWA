@@ -1,19 +1,20 @@
 import feedparser
 from pprint import pprint
-f = feedparser.parse('https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS')
-t = f.entries
+complete_feed = feedparser.parse('https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS')
+
+#print(complete_feed.entries)
+
+fuelprice_list = []
+
+for entry in complete_feed['entries']:
+    fuel_dict = {}
+#fuelprice_list = [fuel_dict[entry["address"]]]
+
+    fuel_dict['address'] = entry["address"]
+    fuel_dict['price'] = entry["price"]
+
+    fuelprice_list.append(fuel_dict)
 
 
-price = ["price1", "Price2"]
-price.append("price3")
 
-totalEntries = len(t)-1
-
-FuelEntries =[]
-i=0
-for i in range(totalEntries):
-    FuelEntries.append(f.entries[i])
-
-
-#pprint(FuelEntries)
-pprint(FuelEntries)
+pprint(fuelprice_list)
