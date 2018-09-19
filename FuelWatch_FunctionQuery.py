@@ -1,32 +1,18 @@
 import feedparser
 from pprint import pprint
-complete_feed = feedparser.parse('https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS')
 
-#print(complete_feed.entries)
-
-fuelprice_list = []
-
-# for entry in complete_feed['entries']:
-#     fuel_dict = {}
-# #fuelprice_list = [fuel_dict[entry["address"]]]
-#
-#     fuel_dict['address'] = entry["address"]
-#     fuel_dict['price'] = entry["price"]
-#
-#     fuelprice_list.append(fuel_dict)
-
-
-
-#pprint(fuelprice_list)
 #-------------------------------------------------------------------------------
 #All functions
+#this function return fuel prices by fuel type ULP, premium fuel
 def fuelbyproduct(productid):
     url = feedparser.parse('https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS?Product='+productid)
     return url
+#this function returns fuel prices by day i.e. today or tomorrow
 def fuelbyday(day):
     url = feedparser.parse('https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS?Day='+day)
     return url
 
+#this function structures the data by building list of dictionaries
 def fuelDataBuilder(item):
     item_list = []
     for entry in item['entries']:
@@ -36,15 +22,9 @@ def fuelDataBuilder(item):
         item_list.append(item_dict)
     return item_list
 
-
+#this function sorts the list by fuel prices
 def fuelSorting(items):
     return sorted(items, key = lambda sorteditems: sorteditems['price'])
-
-# def fuelSorting2(items):
-#     return sorted(items, key = lambda somefunction[])
-#
-# def some(items):
-#     return items['price']
 #-------------------------------------------------------------------------------
 
 todaysPrice = fuelbyday('today')
