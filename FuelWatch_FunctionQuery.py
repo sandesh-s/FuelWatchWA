@@ -1,6 +1,16 @@
 import feedparser
 from pprint import pprint
 
+<<<<<<< HEAD
+=======
+
+
+#-----------------------------------------------------------------------------
+#HTML Code Here
+html_file = open('table.html','w')
+html_file.write('<h1>Address</h1>')
+#------------------------------------------------------------------------------
+>>>>>>> c15645dfa5888e0ef94c8971852b17cfff40a929
 #-------------------------------------------------------------------------------
 #All functions
 #this function return fuel prices by fuel type ULP, premium fuel
@@ -37,7 +47,23 @@ combinedPricesNotSorted = todaysPriceNotSorted + tomorrowsPriceNotSorted
 
 combinedPricesSorted = fuelSorting(combinedPricesNotSorted)
 
-pprint(combinedPricesSorted)
+# pprint(todaysPriceNotSorted[1])
 
 
-#
+
+#Converting todays and tomorrows Price into a string
+html_file.write('<table> </table>')
+for items in todaysPriceNotSorted:
+    string_Address=''
+    string_Price=''
+    string_Address = items['address']
+    string_Price   = items['price']
+    html_file.write('''
+    <tbody>
+        <tr>
+            <td> {} </td>
+            <td> {} </td>
+        </tr>
+    </tbody>
+
+    '''.format(string_Address,string_Price))
